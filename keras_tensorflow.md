@@ -114,8 +114,8 @@ from tqdm import tqdm
 from PIL import Image
 from collections import namedtuple, OrderedDict
 
-sys.path.append('/home/jeong/microsoft/intel/tensorflow/models/research/')
-sys.path.append('/home/jeong/microsoft/intel/tensorflow/models/research/slim/')
+sys.path.append('~/tensorflow/models/research/')
+sys.path.append('~/tensorflow/models/research/slim/')
 from object_detection.utils import dataset_util
 
 # Which model was used for detection

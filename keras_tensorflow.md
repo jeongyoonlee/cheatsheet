@@ -237,7 +237,7 @@ if __name__ == '__main__':
 * Inputs
   * `config_file`: a JSON file for detection model training (e.g. faster_rcnn_resnet101_coco_2018_01_28.json`) that contains:
     * `model:fine_tune_checkpoint`: e.g. `faster_rcnn_resnet101_coco_2018_01_28/model.ckpt`
-  	* `train_input_reader:label_map_path`: a label map file (e.g. `mscoco_label_map.pbtxt`)
+      * `train_input_reader:label_map_path`: a label map file (e.g. `mscoco_label_map.pbtxt`)
     * `train_input_reader:tf_record_input_reader:input_path`: a TFRecords file for training (e.g. `train_record`)
     * `eval_input_reader:label_map_path`: a label map file (e.g. `mscoco_label_map.pbtxt`)
     * `eval_input_reader:tf_record_input_reader`: a TFRecords file for evaluation (e.g. `valid_record`)
@@ -263,17 +263,17 @@ model_fn = functools.partial(model_builder.build, model_config=model_config, is_
 create_input_dict_fn = functools.partial(input_reader_builder.build, input_config)
 
 trainer.train(create_tensor_dict_fn=create_input_dict_fn,
-			  create_model_fn=model_fn,
-			  train_config=train_config,
-			  train_dir=train_dir,
-			  num_clones=1,
-			  clone_on_cpu=False,
-			  ps_tasks=0,
-			  worker_replicas=1,
-			  worker_job_name='worker',
-			  task=0,
-			  is_chief=True,
-			  master='')
+              create_model_fn=model_fn,
+              train_config=train_config,
+              train_dir=train_dir,
+              num_clones=1,
+              clone_on_cpu=False,
+              ps_tasks=0,
+              worker_replicas=1,
+              worker_job_name='worker',
+              task=0,
+              is_chief=True,
+              master='')
 ```
 * Evaluation
 ```python
@@ -292,8 +292,8 @@ max_num_classes = max([item.id for item in label_map.item])
 categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes)
 
 evaluator.evaluate(create_input_dict_fn, model_fn, eval_config, categories, 
-				   train_dir,
-				   eval_dir)
+                   train_dir,
+                   eval_dir)
 
 ```
 * Saving the trained model
@@ -304,14 +304,14 @@ from object_detection.protos import pipeline_pb2
 
 pipeline_config = pipeline_pb2.TrainEvalPipelineConfig()
 with tf.gfile.GFile(config_file, 'r') as f:
-	text_format.Merge(f.read(), pipeline_config)
+    text_format.Merge(f.read(), pipeline_config)
 
 step = 2000 # the number of epochs at which you want to save the model
 
 exporter.export_inference_graph('image_tensor',
-								pipeline_config,
-								os.path.join(train_dir, 'model.ckpt-{}'.format(step)),
-								train_dir)
+                                pipeline_config,
+                                os.path.join(train_dir, 'model.ckpt-{}'.format(step)),
+                                train_dir)
 
 ```
 #### Object detection with the newly trained model

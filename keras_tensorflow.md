@@ -102,7 +102,7 @@ with open(detection_file, 'w') as out_file:
 * Outputs
   * `train_record`: a TFRecords file that contains images and detection labels
 * Code
-```
+```python
 import os
 import io
 import pandas as pd

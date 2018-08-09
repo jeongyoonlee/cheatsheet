@@ -317,7 +317,7 @@ exporter.export_inference_graph('image_tensor',
 #### Object detection with the newly trained model
 
 * Inputs:
-  *`model_file`: the saved model file from the training step
+  * `model_file`: the saved model file from the training step
   * `label_map_file`: a text file that contains the dictonary of classes and their index (e.g. `mscoco_label_map.pbtxt`)
   * `image_dir`: a directory that contains images
 * Outputs:

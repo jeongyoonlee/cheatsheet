@@ -327,6 +327,17 @@ exporter.export_inference_graph('image_tensor',
 
 ## Troubleshooting
 
+### Ubuntu
+
+#### Tensorflow installation from source failed with `/usr/bin/ld: cannot find Scrt1.o`
+
+* Reference: [Stackoverflow](https://stackoverflow.com/questions/6329887/compiling-problems-cannot-find-crt1-o/9004026#9004026)
+* Cause:
+* Solution:
+```bash
+sudo ln -s /usr/lib/x86_64-linux-gnu /usr/lib64
+```
+
 ### Windows
 
 #### Tensorflow crashes with `CUBLAS_STATUS_ALLOC_FAILED`

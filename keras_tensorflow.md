@@ -1,5 +1,42 @@
 # Keras + Tensorflow
 
+## Tensorflow Installation
+
+### Tensorflow 1.10 Installation from Source with CUDA 9.2
+
+* Reference: [Install TensorFlow from Sources](https://www.tensorflow.org/install/install_sources)
+* Install Bazel: 
+  * Download the bazel binary installer named `bazel-<version>-installer-linux-x86_64.sh` from https://github.com/bazelbuild/bazel/releases
+  * Run the installer and setup the environment
+  ```bash
+  $ chmod +x bazel-<version>-installer-linux-x86_64.sh
+  $ ./bazel-<version>-installer-linux-x86_64.sh --user
+  $ export PATH="$PATH:$HOME/bin"
+  ```
+* Install NVidia GPU driver, CUDA 9.2 Toolkit, cuDNN SDK, CUPTI, NCCL 2.2
+* Clone the Tensorflow repository, checkout 1.10, and configure environment
+  * Put 9.2 for CUDA version and relevant version info for cuDNN and NCCL
+```bash
+$ git clone https://github.com/tensorflow/tensorflow 
+$ cd tensorflow
+$ git checkout r1.10
+$ ./configure
+```
+* Build
+  * For CPU only:
+  ```bash
+  $ bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
+  ```
+  * For GPU support:
+  ```bash
+  $ bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package
+  ```
+* Install
+```bash
+$ bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
+$ sudo pip install /tmp/tensorflow_pkg/tensorflow-1.10.0-*.whl
+```
+
 ## Tensorflow Object Detection API
 
 ### Common Workflow

@@ -364,6 +364,29 @@ exporter.export_inference_graph('image_tensor',
 
 ## Troubleshooting
 
+### Tensorflow Object Detection API
+
+#### No `train.py`, `trainer.py` or `evaluator.py`
+
+* Reference: [Tensorflow Github](https://github.com/tensorflow/models/commit/7025590841588e82f371ef0fef7dd77a8a71efb8#diff-ec5019f462ab30dcd5847b82ce2324ac)
+* Cause: Those "old" files have been moved into the `legacy` folder.
+* Solution: Either use new API (e.g. `model_main.py`) or use them from the `legacy` folder.
+```python
+from object_detection.legacy import trainer, evaluator
+```
+
+#### `Value Error: First Step Cannot Be Zero`
+
+* Reference: [Tensorflow Github](https://github.com/tensorflow/models/issues/3794)
+* Cause: "We recently updated the code so this block is not recognized anymore. The model configs in model zoo still have this block so it crashed the program. You can remove this block or use the latest config instead of the downloaded one in tar.gz file." by @pkulzc
+* Solution: Remove the following block from the model config file
+```json
+schedule {
+	step: 0
+	learning_rate: .0001
+}
+```
+
 ### Ubuntu
 
 #### Tensorflow installation from source failed with `/usr/bin/ld: cannot find Scrt1.o`
